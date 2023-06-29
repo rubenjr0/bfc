@@ -10,7 +10,7 @@ pub enum Expr {
     Dec(usize),
     IncPtr(usize),
     DecPtr(usize),
-    StartLoop(usize),
+    StartLoop,
     EndLoop,
     Print,
     Read,
@@ -43,14 +43,7 @@ impl Iterator for Parser {
                 Token::Dec => Expr::Dec(count),
                 Token::IncPtr => Expr::IncPtr(count),
                 Token::DecPtr => Expr::DecPtr(count),
-                Token::StartLoop => {
-                    let length = self
-                        .token_stream
-                        .peeking_take_while(|t| t == &Token::EndLoop)
-                        .count()
-                        + 1;
-                    Expr::StartLoop(length)
-                }
+                Token::StartLoop => Expr::StartLoop,
                 Token::EndLoop => Expr::EndLoop,
                 Token::Print => Expr::Print,
                 Token::Read => Expr::Read,

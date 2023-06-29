@@ -2,6 +2,7 @@ use std::{
     collections::VecDeque,
     fs::File,
     io::{BufReader, Read},
+    path::Path,
 };
 
 use anyhow::Result;
@@ -40,7 +41,7 @@ pub struct Tokenizer {
 }
 
 impl Tokenizer {
-    pub fn new(path: &str) -> Result<Tokenizer> {
+    pub fn new(path: &Path) -> Result<Tokenizer> {
         let file = File::open(path)?;
         let mut reader = BufReader::new(file);
         let mut contents = String::new();

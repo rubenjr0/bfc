@@ -35,7 +35,7 @@ impl CodeGen {
                     };
                 }
                 Expr::DecPtr(n) => self.ptr -= n,
-                Expr::StartLoop(_) => {
+                Expr::StartLoop => {
                     self.loop_count += 1;
                     self.loop_ptr += 1;
                     code.push(format!("loop_{}:", self.loop_count));
@@ -52,7 +52,7 @@ impl CodeGen {
                     }
                 }
                 Expr::Print => code.push(format!(
-                    "\n\tpush DWORD [ebp-{}]\n\tmov eax, 4\n\tmov ebx, 1\n\tmov ecx, esp\n\tmov edx, 1\n\tint 0x80\n\tadd esp, 4\n",
+                    "\n\t; print to stdout\n\tpush DWORD [ebp-{}]\n\tmov eax, 4\n\tmov ebx, 1\n\tmov ecx, esp\n\tmov edx, 1\n\tint 0x80\n\tadd esp, 4",
                     self.ptr * 4,
                 )),
                 Expr::Read => code.push(format!("\t; syscall shit")),

@@ -13,12 +13,17 @@ use tokenizer::Tokenizer;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
-    input_path: String,
-    #[arg(short)]
+    input_path: PathBuf,
+    #[arg(short, help = "The default is the same as input's filename")]
     output_path: Option<PathBuf>,
-    #[arg(short, long, default_value_t = false)]
+    #[arg(short, long, default_value_t = false, help = "Don't print messages")]
     quiet: bool,
-    #[arg(short, long, default_value_t = false)]
+    #[arg(
+        short,
+        long,
+        default_value_t = false,
+        help = "Run the program after compilation"
+    )]
     run: bool,
 }
 
@@ -40,7 +45,7 @@ fn main() -> Result<()> {
     let mut codegen = CodeGen::new(parser);
     let code = codegen.gen();
 
-    let output_path = output_path.unwrap_or(PathBuf::from("out.s"));
+    let output_path = output_path.unwrap_or(input_path.with_extension("s"));
     let output_path = output_path.with_extension("s");
     let object_path = output_path.with_extension("o");
     let object_path = object_path.to_str().unwrap();

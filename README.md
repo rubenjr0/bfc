@@ -17,10 +17,12 @@ $ cargo install bfc
 ## Usage
 
 ```bash
-$ bfc INPUT [output]
+$ bfc INPUT [options]
 ```
 
 The available options are:
 - `-o`: Specify the name of the output files and executable
 - `-q`: Quiet, don't print messages
 - `-r`: Run the executable
+
+Please run `bfc --help` for a more detailed description of the options.
