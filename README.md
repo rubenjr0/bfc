@@ -2,6 +2,8 @@
 
 Brainf*ck compiler targeting 32bit Intel x86 written in Rust.
 
+> Not affiliated with the [`bfc`](https://crates.io/crates/bfc) crate with the same names and purpose. 
+
 ## Dependencies
 Depends on `nasm` and `ld` to assemble and link the project.
 
